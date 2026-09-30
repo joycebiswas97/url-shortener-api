@@ -1,0 +1,27 @@
+{
+  "name": "url-shortener-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joycebiswas97/url-shortener-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/joycebiswas97/url-shortener-api/issues"
+  },
+  "homepage": "https://github.com/joycebiswas97/url-shortener-api#readme",
+  "dependencies": {
+    "dotenv": "^18.0.4",
+    "express": "^5.2.1",
+    "mongoose": "^9.10.3",
+    "nanoid": "^3.3.7"
+  }
+}

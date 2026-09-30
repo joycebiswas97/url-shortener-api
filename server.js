@@ -1,0 +1,20 @@
+require('dotenv').config();
+const express = require('express');
+const connectDB = require('./src/config/db');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+connectDB();
+
+app.get('/health', (req,res)=>{
+  res.status(200).json({
+    status: 'ok',
+    service: 'URL shortener app'
+  })
+});
+
+app.listen(PORT, () =>{
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
