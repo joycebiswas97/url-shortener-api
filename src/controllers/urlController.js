@@ -46,4 +46,26 @@ const shortenUrl = async(req,res) => {
   }
 };
 
-module.exports = shortenUrl;
+const redirectToUrl = async(req,res) => {
+  try{
+    const {shortCode} = req.params;
+    const urlDoc = await Url.findOne({shortCode});
+    if(!urlDoc){
+      return res.status(404).json({error:"Short URL not found"});
+    }
+
+    urlDoc.clicks += 1;
+    await urlDoc.save();
+
+    return res.redirect(urlDoc.originalUrl);
+  }
+  catch(error){
+    console.error('Error redirecting');
+    return res.status(500).json({error:'Internal server error'});
+  }
+}
+
+module.exports = {
+  shortenUrl,
+  redirectToUrl
+};
