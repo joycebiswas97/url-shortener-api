@@ -65,7 +65,30 @@ const redirectToUrl = async(req,res) => {
   }
 }
 
+const getUrlStats = async(req,res) => {
+  try{
+    const {shortCode} = req.params;
+    const urlDoc = await Url.findOne({shortCode}).select('-__v');
+    if(!urlDoc){
+      return res.status(404).json({error:'Short Url not found'});
+    }
+    return res.status(200).json({
+      originalUrl: urlDoc.originalUrl,
+      shortCode: urlDoc.shortCode,
+      shortUrl: `${process.env.BASE_URL}/${urlDoc.shortCode}`,
+      clicks: urlDoc.clicks,
+      createdAt: urlDoc.createdAt,
+      lastAccessedAt:urlDoc.updatedAt
+    });
+  }
+  catch(error){
+    console.error("Error fetching Url stats");
+    return res.status(500).json({error:'Internal server error'});
+  }
+}
+
 module.exports = {
   shortenUrl,
-  redirectToUrl
+  redirectToUrl,
+  getUrlStats
 };
